@@ -1,5 +1,9 @@
 import server from './server';
+import colors from 'colors';
+import { ENV } from './utils';
 
-server.listen(4000, () => {
-	console.log('Server is running on http://localhost:4000');
+server.listen(ENV.PORT, () => {
+	console.info(
+		colors.cyan.bold(`Server is running on http://localhost:${ENV.PORT}`)
+	);
 });
