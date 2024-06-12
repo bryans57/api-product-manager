@@ -17,6 +17,7 @@ async function startDBConnection() {
 const server = express();
 
 startDBConnection();
-server.use(router);
+server.use(express.json());
+server.use('/products', router);
 
 export default server;
