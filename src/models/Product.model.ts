@@ -8,13 +8,13 @@ class Product extends Model {
 		type: DataType.STRING(100),
 		allowNull: false,
 	})
-	name: string;
+	declare name: string;
 
 	@Column({
 		type: DataType.FLOAT,
 		allowNull: false,
 	})
-	price: number;
+	declare price: number;
 
 	@Default(true)
 	@Column({
@@ -22,7 +22,7 @@ class Product extends Model {
 		allowNull: false,
 		defaultValue: true,
 	})
-	availability: boolean;
+	declare availability: boolean;
 }
 
 export default Product;

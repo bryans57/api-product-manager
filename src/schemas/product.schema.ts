@@ -1,6 +1,6 @@
-import { checkSchema } from 'express-validator';
+import { Schema, checkSchema } from 'express-validator';
 
-export const createProductSchema = checkSchema({
+const basicProductSchema = {
 	name: {
 		in: ['body'],
 		isString: {
@@ -17,4 +17,16 @@ export const createProductSchema = checkSchema({
 			options: { min: 0 },
 		},
 	},
-});
+};
+
+export const createProductSchema = checkSchema(basicProductSchema as Schema);
+
+export const updateProductSchema = checkSchema({
+	...basicProductSchema,
+	availability: {
+		in: ['body'],
+		isBoolean: {
+			errorMessage: 'Availability must be a boolean',
+		},
+	},
+} as Schema);
