@@ -30,3 +30,16 @@ export const updateProductSchema = checkSchema({
 		},
 	},
 } as Schema);
+
+export const checkIdParamSchema = checkSchema({
+	id: {
+		in: ['params'],
+		isInt: {
+			errorMessage: 'Id must be an integer',
+		},
+		custom: {
+			options: (value) => value > 0,
+			errorMessage: "Id isn't valid",
+		},
+	},
+} as Schema);

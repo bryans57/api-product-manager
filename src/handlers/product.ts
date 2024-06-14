@@ -74,3 +74,22 @@ export const deleteProduct = async (req: Request, res: Response) => {
 		console.error(error);
 	}
 };
+
+export const updateAvailable = async (req: Request, res: Response) => {
+	try {
+		const { id } = req.params;
+		const product = await Product.findByPk(id);
+		if (!product) {
+			return res.status(404).json({ message: 'Product not found' });
+		}
+		const updated = await product.update({
+			availability: !product.availability,
+		});
+		if (updated) {
+			return res.json({ data: product });
+		}
+		res.status(404).json({ message: 'Product not found' });
+	} catch (error) {
+		console.error(error);
+	}
+};

@@ -5,10 +5,15 @@ import {
 	getProductById,
 	getProductByName,
 	getProducts,
+	updateAvailable,
 	updateProduct,
 } from './handlers';
 import { handlerErrorMiddleware } from './middleware';
-import { createProductSchema, updateProductSchema } from './schemas';
+import {
+	checkIdParamSchema,
+	createProductSchema,
+	updateProductSchema,
+} from './schemas';
 import { param } from 'express-validator';
 
 const router = Router();
@@ -34,19 +39,24 @@ const test = {
 
 // Routing
 router.get('/', getProducts);
-router.get(
-	'/:id',
-	param('id')
-		.isInt()
-		.custom((value) => value > 0)
-		.withMessage("Id isn't valid"),
-	handlerErrorMiddleware,
-	getProductById
-);
+router.get('/:id', checkIdParamSchema, handlerErrorMiddleware, getProductById);
 router.get('/:name', getProductByName);
 
 router.post('/', createProductSchema, handlerErrorMiddleware, createProduct);
+
 router.put('/:id', updateProductSchema, handlerErrorMiddleware, updateProduct);
-router.delete('/:id', deleteProduct);
+router.patch(
+	'/:id',
+	checkIdParamSchema,
+	handlerErrorMiddleware,
+	updateAvailable
+);
+
+router.delete(
+	'/:id',
+	checkIdParamSchema,
+	handlerErrorMiddleware,
+	deleteProduct
+);
 
 export default router;
