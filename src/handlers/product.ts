@@ -56,7 +56,7 @@ export const updateProduct = async (req: Request, res: Response) => {
 export const createProduct = async (req: Request, res: Response) => {
 	try {
 		const savedProduct = await Product.create(req.body);
-		res.json({ message: 'Product created', savedProduct });
+		res.status(201).json({ message: 'Product created', data: savedProduct });
 	} catch (error) {
 		console.error(error);
 	}

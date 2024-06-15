@@ -38,6 +38,7 @@ const test = {
 };
 
 // Routing
+
 router.get('/', getProducts);
 router.get('/:id', checkIdParamSchema, handlerErrorMiddleware, getProductById);
 router.get('/:name', getProductByName);
