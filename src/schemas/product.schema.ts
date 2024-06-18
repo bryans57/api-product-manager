@@ -35,11 +35,11 @@ export const checkIdParamSchema = checkSchema({
 	id: {
 		in: ['params'],
 		isInt: {
-			errorMessage: 'Id must be an integer',
+			errorMessage: 'Id must be a number',
 		},
 		custom: {
 			options: (value) => value > 0,
-			errorMessage: "Id isn't valid",
+			errorMessage: 'Id must be greater than 0',
 		},
 	},
 } as Schema);

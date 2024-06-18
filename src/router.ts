@@ -41,7 +41,7 @@ const test = {
 
 router.get('/', getProducts);
 router.get('/:id', checkIdParamSchema, handlerErrorMiddleware, getProductById);
-router.get('/:name', getProductByName);
+router.get('/name/:name', getProductByName);
 
 router.post('/', createProductSchema, handlerErrorMiddleware, createProduct);
 
